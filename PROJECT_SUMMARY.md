@@ -1,7 +1,7 @@
-# .NET 6 Web API - Task Management API
+# .NET 8 Web API - Task Management API
 
 ## Project Overview
-This is a Task Management API built with .NET 6 following Clean Architecture principles. The project structure provides clear separation of concerns across four distinct layers.
+This is a Task Management API built with .NET 8 following Clean Architecture principles. The project structure provides clear separation of concerns across four distinct layers.
 
 ## Clean Architecture Layers
 
@@ -24,7 +24,8 @@ This is a Task Management API built with .NET 6 following Clean Architecture pri
 - **Dependencies**: Application layer (and Domain transitively)
 - **Location**: `src/TaskManagementApi.Infrastructure/`
 - **Contents**:
-  - `Data/ApplicationDbContext.cs` - Data access implementation placeholder
+  - `Data/ApplicationDbContext.cs` - EF Core DbContext implementation with configured entities
+  - `Migrations/` - Entity Framework Core database migrations
 
 ### 4. **API Layer** (TaskManagementApi.API)
 - **Purpose**: HTTP API endpoints and presentation logic
@@ -87,11 +88,18 @@ ayush-task-api-management/
 ## Getting Started
 
 ### Prerequisites
-- .NET 6.0 SDK (or .NET 8+ SDK for building with cross-version support)
+- .NET 8.0 SDK
 
 ### Build
 ```bash
 dotnet build
+```
+
+### Database Setup
+Apply database migrations to create the database schema:
+```bash
+cd src/TaskManagementApi.API
+dotnet ef database update --project ../TaskManagementApi.Infrastructure
 ```
 
 ### Run
@@ -116,10 +124,27 @@ Update the connection string in `src/TaskManagementApi.API/appsettings.json`:
 ✅ All projects build without errors
 ✅ Clean Architecture dependencies correctly configured
 ✅ Swagger integration complete
+✅ Entity Framework Core configured with SQL Server
+✅ Database schema defined with initial migration
 ✅ Configuration files in place
+✅ Upgraded to .NET 8 for better compatibility
+
+## Database Schema
+
+### TaskItem Entity (Tasks Table)
+The application includes a Tasks table with the following schema:
+
+| Column | Type | Constraints |
+|--------|------|-------------|
+| Id | int | Primary Key, Identity |
+| Title | nvarchar(200) | Required |
+| Description | nvarchar(1000) | Optional |
+| IsCompleted | bit | Required |
+| CreatedAt | datetime2 | Required |
+| UpdatedAt | datetime2 | Optional |
 
 ## Next Steps
-1. Implement Entity Framework Core DbContext in Infrastructure layer
+1. ~~Implement Entity Framework Core DbContext in Infrastructure layer~~ ✅ Complete
 2. Add CRUD operations for TaskItem entity
 3. Implement repository pattern in Infrastructure layer
 4. Add application services in Application layer

@@ -18,7 +18,6 @@ public class TaskRepository : ITaskRepository
 
     public async Task<TaskItem> CreateAsync(TaskItem task)
     {
-        task.CreatedAt = DateTime.UtcNow;
         _context.Tasks.Add(task);
         await _context.SaveChangesAsync();
         return task;

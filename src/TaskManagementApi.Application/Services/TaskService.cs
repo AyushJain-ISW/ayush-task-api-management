@@ -21,7 +21,8 @@ public class TaskService : ITaskService
         {
             Title = title,
             Description = description,
-            IsCompleted = isCompleted
+            IsCompleted = isCompleted,
+            CreatedAt = DateTime.UtcNow
         };
 
         return await _taskRepository.CreateAsync(task);

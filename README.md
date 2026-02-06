@@ -1,6 +1,6 @@
 # Task Management API
 
-This is a CRUD-based API for task management built with .NET 6 Web API following Clean Architecture principles.
+This is a CRUD-based API for task management built with .NET 8 Web API following Clean Architecture principles.
 
 ## 🏗️ Architecture
 
@@ -13,9 +13,18 @@ The project follows Clean Architecture with four distinct layers:
 
 ## 🚀 Quick Start
 
+### Prerequisites
+- .NET 8.0 SDK
+
 ### Build the solution
 ```bash
 dotnet build
+```
+
+### Apply Database Migrations
+```bash
+cd src/TaskManagementApi.API
+dotnet ef database update --project ../TaskManagementApi.Infrastructure
 ```
 
 ### Run the API
@@ -31,9 +40,11 @@ Navigate to `https://localhost:5001/swagger` to explore the API documentation.
 
 - ✅ Clean Architecture folder structure
 - ✅ Swagger/OpenAPI documentation
+- ✅ Entity Framework Core with SQL Server
+- ✅ Database migrations
 - ✅ SQL Server connection string configuration
 - ✅ Health check endpoint
-- ✅ .NET 6 Web API
+- ✅ .NET 8 Web API
 
 ## 📚 Documentation
 

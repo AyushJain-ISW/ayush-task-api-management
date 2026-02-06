@@ -23,11 +23,6 @@ public class TasksController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> CreateTask([FromBody] CreateTaskRequest request)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
-
         var task = await _taskService.CreateTaskAsync(
             request.Title,
             request.Description,
@@ -44,6 +39,6 @@ public class TasksController : ControllerBase
             UpdatedAt = task.UpdatedAt
         };
 
-        return CreatedAtAction(nameof(CreateTask), new { id = response.Id }, response);
+        return Created($"/api/tasks/{response.Id}", response);
     }
 }

@@ -65,3 +65,8 @@ Update PostgreSQL connection string in `src/TaskManagementApi.API/appsettings.js
   "DefaultConnection": "Host=localhost;Database=TaskManagementDb;Username=postgres;Password=postgres"
 }
 ```
+
+**⚠️ Security Note:** The default connection string is for development only. For production:
+- Use environment variables for sensitive credentials
+- Use User Secrets in development (`dotnet user-secrets set "ConnectionStrings:DefaultConnection" "your-connection-string"`)
+- Use secure configuration providers (Azure Key Vault, AWS Secrets Manager, etc.)

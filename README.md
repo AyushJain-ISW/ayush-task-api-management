@@ -1,6 +1,6 @@
 # Task Management API
 
-This is a CRUD-based API for task management built with .NET 8 Web API following Clean Architecture principles.
+This is a CRUD-based API for task management built with .NET 10 Web API following Clean Architecture principles.
 
 ## 🏗️ Architecture
 
@@ -14,7 +14,13 @@ The project follows Clean Architecture with four distinct layers:
 ## 🚀 Quick Start
 
 ### Prerequisites
-- .NET 8.0 SDK
+- .NET 10.0 SDK
+- PostgreSQL 12+ (or Docker)
+
+### Start PostgreSQL (using Docker)
+```bash
+docker run --name postgres-dev -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=TaskManagementDb -p 5432:5432 -d postgres:17-alpine
+```
 
 ### Build the solution
 ```bash
@@ -40,11 +46,12 @@ Navigate to `https://localhost:5001/swagger` to explore the API documentation.
 
 - ✅ Clean Architecture folder structure
 - ✅ Swagger/OpenAPI documentation
-- ✅ Entity Framework Core with SQL Server
+- ✅ Entity Framework Core with PostgreSQL
 - ✅ Database migrations
-- ✅ SQL Server connection string configuration
+- ✅ PostgreSQL connection string configuration
 - ✅ Health check endpoint
-- ✅ .NET 8 Web API
+- ✅ .NET 10 Web API
+- ✅ Create Task endpoint
 
 ## 📚 Documentation
 
@@ -52,9 +59,14 @@ See [PROJECT_SUMMARY.md](./PROJECT_SUMMARY.md) for detailed architecture documen
 
 ## 🔧 Configuration
 
-Update SQL Server connection string in `src/TaskManagementApi.API/appsettings.json`:
+Update PostgreSQL connection string in `src/TaskManagementApi.API/appsettings.json`:
 ```json
 "ConnectionStrings": {
-  "DefaultConnection": "Server=YOUR_SERVER_NAME;Database=TaskManagementDb;..."
+  "DefaultConnection": "Host=localhost;Database=TaskManagementDb;Username=postgres;Password=postgres"
 }
 ```
+
+**⚠️ Security Note:** The default connection string is for development only. For production:
+- Use environment variables for sensitive credentials
+- Use User Secrets in development (`dotnet user-secrets set "ConnectionStrings:DefaultConnection" "your-connection-string"`)
+- Use secure configuration providers (Azure Key Vault, AWS Secrets Manager, etc.)
